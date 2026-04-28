@@ -1,0 +1,105 @@
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.secondRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 720px) { .secondRow { grid-template-columns: 1fr; } }
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 18px;
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 600px) { .statusGrid { grid-template-columns: repeat(2,1fr); } }
+
+.statusBlock {
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.statusCount {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.statusBar {
+  height: 4px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.statusBarFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+.statusPct { font-size: 11px; font-weight: 500; }
+
+.topGarment {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 0;
+}
+.tgName {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 300;
+  color: var(--forest);
+  line-height: 1;
+}
+.tgCount { font-size: 13px; color: var(--muted); }
+
+.noData { font-size: 13px; color: var(--muted); padding: 20px 0; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.table th {
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  font-weight: 500;
+  padding: 0 12px 12px;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.table th:first-child { padding-left: 0; }
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--cream);
+  color: var(--charcoal);
+  vertical-align: middle;
+}
+.table td:first-child { padding-left: 0; }
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: var(--cream); }
+
+.monoCell { font-family: monospace; font-size: 11px; color: var(--muted); }
+.custName { font-weight: 500; }
+.custPhone { font-size: 11px; color: var(--muted); }
+.amtCell { font-family: var(--font-display); font-size: 16px; color: var(--forest); }

@@ -1,0 +1,109 @@
+.wrap {
+  background: var(--cream);
+  border: 1px solid var(--sand-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  font-size: 13px;
+}
+
+.header {
+  text-align: center;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--sand);
+  margin-bottom: 14px;
+}
+
+.shopName {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--forest);
+  letter-spacing: -0.01em;
+}
+
+.shopSub {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.customerInfo {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--sand);
+}
+
+.infoLabel {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  align-self: center;
+}
+
+.infoVal {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+}
+
+.lineItems {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 40px;
+  margin-bottom: 14px;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+  padding: 8px 0;
+  font-style: italic;
+}
+
+.lineRow {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.lineName { color: var(--charcoal); }
+
+.lineQty {
+  color: var(--muted);
+  font-size: 12px;
+  min-width: 32px;
+  text-align: center;
+}
+
+.linePrice {
+  color: var(--charcoal);
+  font-weight: 500;
+  text-align: right;
+  min-width: 64px;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--sand);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.totalAmt {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--forest);
+}

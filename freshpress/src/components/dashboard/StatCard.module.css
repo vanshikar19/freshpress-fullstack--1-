@@ -1,0 +1,32 @@
+.card {
+  background: var(--white);
+  border: 1px solid var(--sand-light);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+.card:hover { box-shadow: var(--shadow-md); }
+
+.label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--charcoal);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}

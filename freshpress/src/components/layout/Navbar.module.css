@@ -1,0 +1,140 @@
+.header {
+  background: var(--white);
+  border-bottom: 1px solid var(--sand-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoMark {
+  width: 40px;
+  height: 40px;
+  background: var(--forest);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: #c8e6d4;
+  letter-spacing: 0.02em;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+}
+
+.brandSub {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  border: 1px solid var(--sand-light);
+}
+
+.navLink {
+  padding: 7px 18px;
+  border-radius: 7px;
+  font-size: 13px;
+  color: var(--muted);
+  transition: all var(--transition);
+  font-weight: 400;
+}
+
+.navLink:hover { color: var(--charcoal); background: var(--cream-dark); }
+
+.active {
+  background: var(--white) !important;
+  color: var(--forest) !important;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+
+.userArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userAvatar {
+  width: 30px;
+  height: 30px;
+  background: var(--forest-pale);
+  border: 1px solid var(--sand-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--forest);
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+
+.userRole {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: capitalize;
+  line-height: 1;
+}
+
+.logoutBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sand-light);
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.logoutBtn:hover {
+  background: var(--danger-pale);
+  border-color: #f5c6c2;
+  color: var(--danger);
+}

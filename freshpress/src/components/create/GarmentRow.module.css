@@ -1,0 +1,107 @@
+.row {
+  display: grid;
+  grid-template-columns: 2fr 110px 120px 90px 36px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cream-dark);
+  animation: slideIn 0.25s ease forwards;
+}
+.row:last-child { border-bottom: none; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.select {
+  padding: 8px 10px;
+  border: 1px solid var(--sand-light);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--charcoal);
+  font-size: 13px;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+.select:focus { border-color: var(--forest); }
+
+.qtyWrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--sand-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--white);
+}
+
+.stepper {
+  width: 30px;
+  height: 34px;
+  background: var(--cream);
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition);
+  flex-shrink: 0;
+  border: none;
+}
+.stepper:hover { background: var(--cream-dark); color: var(--charcoal); }
+
+.qtyVal {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+}
+
+.priceWrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--sand-light);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  overflow: hidden;
+  padding-left: 10px;
+  gap: 4px;
+}
+.rupee { font-size: 13px; color: var(--muted); flex-shrink: 0; }
+.priceInput {
+  width: 100%;
+  padding: 8px 8px 8px 0;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--charcoal);
+}
+.priceInput:focus { outline: none; }
+.priceInput::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.lineTotal {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--forest);
+  text-align: right;
+}
+
+.removeBtn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f5c6c2;
+  border-radius: var(--radius-sm);
+  background: var(--danger-pale);
+  color: var(--danger);
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+.removeBtn:hover { background: #f8d7d4; }
+.removeBtn:disabled { opacity: 0.3; pointer-events: none; }

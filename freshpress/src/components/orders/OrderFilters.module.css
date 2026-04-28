@@ -1,0 +1,51 @@
+.wrap { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+
+.searchWrap { position: relative; display: flex; align-items: center; }
+.searchIcon { position: absolute; left: 14px; color: var(--muted); pointer-events: none; }
+.searchInput {
+  width: 100%; padding: 11px 40px;
+  border: 1px solid var(--sand-light); border-radius: var(--radius-md);
+  background: var(--white); font-size: 14px; color: var(--charcoal);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.searchInput::placeholder { color: var(--sand); }
+.searchInput:focus { outline: none; border-color: var(--forest); box-shadow: 0 0 0 3px rgba(44,95,63,0.1); }
+.clearBtn {
+  position: absolute; right: 12px;
+  display: flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--cream-dark); color: var(--muted); cursor: pointer; border: none;
+}
+.clearBtn:hover { background: var(--cream-darker); }
+
+.filtersRow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+.select {
+  padding: 8px 12px; border: 1px solid var(--sand-light); border-radius: var(--radius-md);
+  background: var(--white); font-size: 13px; color: var(--charcoal); cursor: pointer;
+  min-width: 170px;
+}
+.select:focus { outline: none; border-color: var(--forest); }
+
+.dateWrap { display: flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--sand-light); border-radius: var(--radius-md); padding: 0 12px; }
+.dateLabel { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.dateInput { border: none; background: transparent; font-size: 13px; color: var(--charcoal); padding: 8px 0; cursor: pointer; }
+.dateInput:focus { outline: none; }
+
+.pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill {
+  padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 400;
+  border: 1px solid var(--sand-light); background: var(--white); color: var(--muted);
+  cursor: pointer; transition: all var(--transition);
+}
+.pill:hover { background: var(--cream-dark); color: var(--charcoal); }
+.active { background: var(--forest) !important; color: #fff !important; border-color: var(--forest) !important; font-weight: 500; }
+
+.clearAll {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 12px; border-radius: var(--radius-sm);
+  font-size: 12px; color: var(--danger); background: var(--danger-pale);
+  border: 1px solid #f5c6c2; cursor: pointer; transition: background var(--transition);
+  margin-left: auto;
+}
+.clearAll:hover { background: #f8d7d4; }
