@@ -43,7 +43,6 @@ cd freshpress && npm install && npm run dev
 ### Backend
 ```bash
 cd freshpress-backend
-cp .env.example .env        # set MONGODB_URI + JWT_SECRET
 npm install
 node seed.js                # seed demo data
 npm run dev                 # http://localhost:5000
@@ -54,7 +53,10 @@ npm run dev                 # http://localhost:5000
 # freshpress/.env
 VITE_API_MODE=true
 VITE_API_URL=http://localhost:5000/api
+
+#freshpress/.env available seperately on google drive-copy and paste!
 ```
+
 
 ## Features
 
