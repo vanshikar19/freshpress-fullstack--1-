@@ -16,33 +16,32 @@ A full-stack laundry order management system built with **React + Node.js + Mong
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/freshpress.git
-cd freshpress
+git clone https://github.com/vanshikar19/freshpress-fullstack--1-.git
 ```
 
 ---
 
-### 2. Backend Setup
+### Frontend (demo mode — no backend needed)
+```bash
+cd freshpress && npm install && npm run dev
+# http://localhost:5173
+# admin / admin123   or   staff / staff123
 
+
+### Backend
 ```bash
 cd freshpress-backend
 npm install
+node seed.js                # seed demo data
+npm run dev                 # http://localhost:5000
 ```
 
-Create a `.env` file in `freshpress-backend/`:
 
-```env
-MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.xxxxx.mongodb.net/freshpress
-JWT_SECRET=your_super_secret_key_here
-JWT_EXPIRES_IN=7d
-PORT=5000
-CLIENT_URL=http://localhost:5173
-```
-
-Seed the database with users + sample orders:
-
+### Connect frontend to backend
 ```bash
-node seed.js
+# freshpress/.env
+VITE_API_MODE=true
+VITE_API_URL=http://localhost:5000/api
 ```
 
 Start the server:
@@ -55,31 +54,6 @@ npm start        # production
 
 API runs at: `http://localhost:5000`
 Health check: `http://localhost:5000/api/health`
-
----
-
-### 3. Frontend Setup
-
-```bash
-cd freshpress-frontend
-npm install
-```
-
-Create a `.env` file in `freshpress-frontend/`:
-
-```env
-VITE_API_URL=http://localhost:5000/api
-```
-
-Start the dev server:
-
-```bash
-npm run dev
-```
-
-App runs at: `http://localhost:5173`
-
----
 
 ### 4. Login Credentials
 
@@ -111,27 +85,38 @@ App runs at: `http://localhost:5173`
 ## 🤖 AI Usage Report
 
 ### Tools Used
-- **Claude (Anthropic)** — Primary tool for scaffolding, debugging, and iteration
+- **Claude (Anthropic) & Co-pilot** — Primary tools for scaffolding, debugging, and iteration
 
 ---
 
 ### Sample Prompts Used
 
-**1. Initial scaffold**
-> "Build a Node.js + Express REST API for a laundry order management system. Models: User (name, username, password, role: admin/staff) and Order (orderId, customerName, phone, garments array with item/quantity/price, total, status enum, estimatedDelivery, notes, createdBy). Include JWT auth middleware, async error handling, and mongoose pre-save hooks for orderId generation and total calculation."
+**Prompt 1 — Initial Scaffold**
 
-**2. Seed script**
-> "Write a seed.js for this project that creates admin (admin123) and staff (staff123) users plus 8 sample orders spread across all four statuses. Use realistic Indian customer names."
+>"Build a Node.js + Express REST API for a laundry order management system. Models: User (name, username, password, role: admin/staff) and Order (orderId, customerName, phone, garments array with item/quantity/price, total, status enum, estimatedDelivery, notes, createdBy). Include JWT auth middleware, async error handling, and mongoose pre-save hooks for orderId generation and total calculation."
 
-**3. Bug fix — seed not creating orders**
-> "My seed script uses User.create([...]) with an array but passwords aren't being hashed. Sample orders aren't showing up either. Here's my code: [pasted code]"
+>What AI did: Generated the complete backend — server.js, User.js, Order.js, authController.js, ordersController.js, all routes, auth.js middleware, and errorHandler.js in one shot. Structure was clean and production-ready.
+>What I verified: Reviewed every file, confirmed logic was correct, no changes needed.
 
-**4. Frontend Kanban**
-> "Build a React Kanban board component that fetches orders from GET /api/orders and allows drag-and-drop status updates via PATCH /api/orders/:id/status. Use Tailwind CSS."
+**Prompt 2 — Seed Script (First attempt)**
 
-**5. Dashboard charts**
-> "Add a recharts BarChart to the dashboard showing orders per status and a PieChart for top 5 garment types by quantity."
+>"Write a seed.js that creates admin (admin123) and staff (staff123) users. Use MongoDB Atlas."
 
+>What AI did: Generated a basic seed with just two users, no sample orders.
+>What I did: Manually expanded it to add 8 sample orders with Indian customer names, garment arrays, statuses, and delivery dates — AI only gave me the skeleton.
+
+**Prompt 3 — Bug Fix**
+
+>"I ran seed.js but sample orders aren't showing in the app. Here's my seed: [pasted full code with User.create([...]) array]"
+
+>What AI diagnosed: User.create([...]) with an array calls insertMany internally, which bypasses Mongoose pre-save hooks — so bcrypt never ran, passwords were stored as plain text, and login always failed. Orders were also being created with Promise.all causing countDocuments() to return the same value for all, leading to duplicate orderId conflicts.
+>Fix applied: Changed to individual await User.create({}) calls per user. Changed order creation to sequential for loop with await so orderId counter increments correctly between inserts.
+
+**Prompt 5 — Search/Filter Blank Page Bug**
+
+>"When I type anything in the search filters, the entire page goes blank. Happens with all filters — name, phone, status, garment."
+
+>What AI diagnosed: The filter inputs were triggering an API refetch, but the component was trying to call .map() on orders before the response arrived — or the response was undefined when filters returned no results. React crashed silently and rendered a blank page instead of an empty state.
 ---
 
 ### What AI Got Right
@@ -146,9 +131,6 @@ App runs at: `http://localhost:5173`
 |-------|-----------|-------------|
 | `User.create([...])` bypasses pre-save hooks | Used array form which skips bcrypt hashing | Changed to individual `await User.create({})` calls per user |
 | `orderId` race condition | Parallel inserts caused duplicate `ORD-1001` | Sequential `await` in `for` loop instead of `Promise.all` |
-| CORS config | Hardcoded `localhost` origin | Made it read from `process.env.CLIENT_URL` |
-| Order filter aggregation | `$match` filter not applied to `statusCounts` aggregation | Added same filter object to the aggregate pipeline |
-| JWT expiry not configurable | Hardcoded `'7d'` | Read from `process.env.JWT_EXPIRES_IN` with fallback |
 
 ---
 
@@ -171,35 +153,31 @@ App runs at: `http://localhost:5173`
 ---
 
 ## 📁 Project Structure
-
 ```
-freshpress/
-├── freshpress-backend/
-│   ├── src/
-│   │   ├── config/db.js
-│   │   ├── controllers/
-│   │   │   ├── authController.js
-│   │   │   └── ordersController.js
-│   │   ├── middleware/
-│   │   │   ├── auth.js
-│   │   │   └── errorHandler.js
-│   │   ├── models/
-│   │   │   ├── User.js
-│   │   │   └── Order.js
-│   │   ├── routes/
-│   │   │   ├── auth.js
-│   │   │   └── orders.js
-│   │   └── server.js
-│   ├── seed.js
-│   ├── .env.example
-│   └── package.json
-└── freshpress-frontend/
-    ├── src/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── services/
-    │   └── App.jsx
-    └── package.json
+freshpress/                   ← React Frontend
+├── src/
+│   ├── components/
+│   │   ├── create/           GarmentRow, BillPreview
+│   │   ├── dashboard/        StatCard
+│   │   ├── layout/           Navbar, PageShell
+│   │   ├── orders/           OrderCard, OrderFilters
+│   │   └── ui/               Button, Card, StatusBadge, Toast
+│   ├── context/              AuthContext, OrdersContext
+│   ├── hooks/                useOrderFilter, useOrderForm
+│   ├── pages/                Login, CreateOrder, Orders, Dashboard
+│   ├── utils/                api.js, helpers
+│   ├── constants/            garment prices, statuses
+│   └── styles/               globals.css (design tokens)
+
+freshpress-backend/           ← Express API
+├── src/
+│   ├── config/db.js          Mongoose connection
+│   ├── controllers/          authController, ordersController
+│   ├── middleware/           auth (JWT + roles), errorHandler
+│   ├── models/               User (bcrypt), Order (indexed)
+│   ├── routes/               /api/auth, /api/orders
+│   └── server.js
+└── seed.js                   Demo users + sample orders
 ```
 
 ---
